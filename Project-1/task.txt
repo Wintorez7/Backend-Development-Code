@@ -1,0 +1,11 @@
+GET /users - HTML document Render
+GET /api/user - list all users JSON - Done
+
+GET /api/user1 - get the user ID 1
+GET /api/user2 - get the user ID 2
+
+Dynamic Path parameter
+GET /api/user/:id
+:id -> variable | Dynamic
+
+POST /api/user - create new server
