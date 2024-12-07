@@ -42,25 +42,22 @@ app.post("/api/user",(req,res) => {
 })
 
 
-app.patch("/api/user/:id",(req,res) => {
     // Todo: Edit the user id
-    // app.patch("/api/user/:id", (req, res) => {   
-    //     const id = Number(req.params.id);
-    //     const userIndex = users.findIndex(user => user.id === id);
-    //     if (userIndex === -1) {
-    //         return res.status(404).json({ status: "error", message: "User not found" });
-    //     }
-    //     users[userIndex] = { ...users[userIndex], ...req.body };
-    //     fs.writeFile('./MOCK_DATA.json', JSON.stringify(users), (error) => {
-    //         if (error) {
-    //             return res.status(500).json({ status: "error", message: "Failed to update user" });
-    //         }
-    //         res.json({ status: "success", user: users[userIndex] });
-    //     });
-    // });
+    app.patch("/api/user/:id", (req, res) => {   
+        const id = Number(req.params.id);
+        const userIndex = users.findIndex(user => user.id === id);
+        if (userIndex === -1) {
+            return res.status(404).json({ status: "error", message: "User not found" });
+        }
+        users[userIndex] = { ...users[userIndex], ...req.body };
+        fs.writeFile('./MOCK_DATA.json', JSON.stringify(users), (error) => {
+            if (error) {
+                return res.status(500).json({ status: "error", message: "Failed to update user" });
+            }
+            res.json({ status: "success", user: users[userIndex] });
+        });
+    });
     
-})
-
 
 app.delete("/api/user/:id",(req,res) => {
     const body = req.body;
