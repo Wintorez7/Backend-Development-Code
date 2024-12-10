@@ -8,6 +8,25 @@ const PORT = 4000;
 // Middleware - plugin
 app.use(express.urlencoded({extended: false}))
 
+app.use((req,res,next) => {
+    fs.appendFile('log.txt',
+         `\n${ Date.now()}:${req.method}:${req.path}`
+         ,(err,data) => {
+          next();
+    })
+})
+
+app.use((req,res,next) => {
+    console.log("hello from middleware 1")
+    req.myUserName = "M.K.DeV"
+    next();
+})
+
+app.use((req,res,next) => {
+    console.log("hello from middleware 2",req.myUserName)
+    next();
+})
+
 // Routes
 app.get("/user",(req,res) => {
     const html = `
@@ -20,6 +39,9 @@ app.get("/user",(req,res) => {
 
 // REST API
 app.get("/api/user", (req,res) => {
+    // console.log("I am in Get Route", req.myUserName)
+    res.setHeader("X-MyName","Mohan Kumhar")
+    // always add X to custom header
     return res.json(users)
 })
 
@@ -35,8 +57,11 @@ app.post("/api/user",(req,res) => {
     // to create user
     const body = req.body;
     users.push({...body, id: users.length + 1});
-    fs.writeFile('./MOCK_DATA.json',JSON.stringify(users),(error,data) => {
-        return  res.json({status:"success",id:users.length});
+    fs.writeFile('./MOCK_DATA.json',JSON.stringify(users),(error) => {
+        if(error){
+            return res.status(500).json({status:error,message:"Faild to save Data"})
+        }
+        res.json({status:"success",id:users.length});
     })
    
 })
