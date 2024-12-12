@@ -49,6 +49,9 @@ app.get("/api/user", (req,res) => {
 app.get("/api/user/:id", (req,res) => {
     const id = Number(req.params.id);
     const user = users.find((user) => user.id === id);
+    if(!user){
+        return res.status(404).json({msg:"user not Found"})
+    }
     return res.json(user);
 })
 
@@ -56,6 +59,9 @@ app.get("/api/user/:id", (req,res) => {
 app.post("/api/user",(req,res) => {
     // to create user
     const body = req.body;
+    if(!body || !body.first_name || !body.last_name || !body.email || !body.gender || !body.job_title){
+        return res.status(400).json({msg:"All Field Required"})
+    }
     users.push({...body, id: users.length + 1});
     fs.writeFile('./MOCK_DATA.json',JSON.stringify(users),(error) => {
         if(error){
@@ -93,4 +99,6 @@ app.delete("/api/user/:id",(req,res) => {
 })
 
 app.listen(PORT, () => { console.log(`Server started at PORT: ${PORT}`) })
+
+
 
