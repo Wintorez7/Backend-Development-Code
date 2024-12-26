@@ -3,16 +3,16 @@ import http from 'http';
 const server = http.createServer();
 
 server.on('request',(req,res) => {
-    console.log(req.method);
+    res.setHeader("Content-Type","text")
 
   if(req.method == "GET"){
     res.writeHead(200,{"Content-type":"text/plain"}); 
     res.statusCode = 200;
-    res.end("Hello Nodejs this http sever")
+    res.end([{name:"Banana"},{name:"Appel"},{name:"orange"}])
   }else{
-    res.statusCode = 400;
+    res.statusCode = 404;
     res.end("Method Not Allow")
-  }
+  }   
 })
 
 server.listen(3000,() => {
