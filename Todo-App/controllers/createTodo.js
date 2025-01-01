@@ -13,7 +13,7 @@ exports.createTodo = async(req,res) => {
             {
                 success:true,
                 data:response,
-                message:"Entry created successfully"
+                message:"Entry created successfully" 
             }
         );
     }
