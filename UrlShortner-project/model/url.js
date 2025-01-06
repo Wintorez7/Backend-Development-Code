@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 
-
 const urlSchema = new mongoose.Schema({
     shortId:{
         type:String,
@@ -11,7 +10,7 @@ const urlSchema = new mongoose.Schema({
         type:String,
         required:true,
     },
-    visi:[ { timestamp:{type:Number} } ],
+    visitHistory:[ { timestamp:{type:Number} } ],
 
 },{ timestamps:true })
 

@@ -5,4 +5,6 @@ const router = express.Router();
 
 router.post("/", handleGenerateNewShortUrl);
 
+router.get('/analytics',)
+
 export default router;
