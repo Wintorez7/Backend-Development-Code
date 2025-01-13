@@ -6,16 +6,22 @@ const product = [{ name:"apple"},{name:"Mango"},{name:"orange"}];
 
 server.on('request',(req,res) => {
     // console.log(req.method)
-
-    if(req.method === "GET"){
-      res.setHeader("Content-Type","application/json");
-      res.statusCode = 200;
-      res.end(JSON.stringify(product))
-    }else{
+    console.log(req.url)
+   if(req.url === "/products"){
+      if(req.method === "GET"){
+        res.setHeader("Content-Type","application/json");
+        res.statusCode = 200;
+        res.end(JSON.stringify(product))
+      }else{
+        res.setHeader("Content-Type","text/plain");
+        res.statusCode = 405;
+        res.end("Method Not Allowed");
+      }
+   }else{
       res.setHeader("Content-Type","text/plain");
-      res.statusCode = 405;
-      res.end("Method Not Allowed");
-    }
+      res.statusCode = 404;
+      res.end("Page not Found");
+   }
 
 });
 
