@@ -7,6 +7,10 @@ const app = express();
 
 app.use(express.json())
 
+app.get('/test',(req,res) => {
+    return res.end('<h1>Hey from server</h1>')
+});
+
 app.use("/url", urlRoute);
 app.get('/:shortId', async(req,res) => {
     const shortId = req.params.shortId;
