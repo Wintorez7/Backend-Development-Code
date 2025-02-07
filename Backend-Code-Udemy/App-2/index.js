@@ -13,9 +13,8 @@ app.get("/",(req,res,next) => {
     res.send('<h1>Root (/)</h1>')
 })
 
-app.use(adminRoutes);
-
-app.use(shopRoutes);
+app.use('/admin', adminRoutes);
+app.use('/shop',shopRoutes);
 
 
 app.listen(PORT,() => {
