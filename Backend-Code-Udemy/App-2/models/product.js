@@ -16,7 +16,16 @@ module.exports = class product{
     }
 
     async save(){
-        fs.readFile(productPath , 'utf-8')
+        fs.readFile(productPath , 'utf-8',(err,data) => {
+            if(err){
+                console.log(err);
+                return;
+            }
+            const productData = JSON.parse(data);
+            productData.push({ id:productData.length + 1 ,name:this.name, price:this.price} )
+
+            fs.writeFile(productPath)
+        })
     }
 
 }
