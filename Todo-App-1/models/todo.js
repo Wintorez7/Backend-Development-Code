@@ -3,12 +3,12 @@ import mongoose from "mongoose";
 const todoSchema = new mongoose.Schema({
     title:{
         type:String,
-        require:true
+        required:true
     },
     description:{
         type:String,
-        require:true
+        required:true
     }
 })
 
-export const TodoSchema = mongoose.model('User', todoSchema)
+export const Todo = mongoose.model('Todo', todoSchema)
