@@ -33,6 +33,7 @@ app.get('/products',(req,res) => {
 // get a single products
 app.get('/products/:id',(req,res) => {
     const productId = parseInt(req.params.id)
+    console.log(req.params);
     const products = [
         {
             id:1,
