@@ -48,3 +48,16 @@ app.get('/books/:id',(req,res) => {
 app.get('/books',(req,res) => {
     res.json(books)
 })
+
+// add a new book
+app.post('/add',(req,res) => {
+    const newBook = {
+        id : books.length + 1,
+        title : `Book ${books.length + 1}`
+    }
+    books.push(newBook);
+    res.status(200).json({
+        data : newBook,
+        message : 'New Book Added Succesfully'
+    })
+})
