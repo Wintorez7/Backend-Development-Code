@@ -52,8 +52,8 @@ app.get('/books',(req,res) => {
 // add a new book
 app.post('/add',(req,res) => {
     const newBook = {
-        id : (books.length + 1).toString(),
-        title : `Book ${books.length + 1}`
+        id : Math.floor(Math.random()*1000).toString(),
+        title : `Book ${Math.floor(Math.random()*1000).toString()}`
     }
     books.push(newBook);
     res.status(200).json({
