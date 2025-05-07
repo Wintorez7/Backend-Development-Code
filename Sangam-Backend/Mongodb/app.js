@@ -20,14 +20,32 @@ const User = mongoose.model('User',UserSchema);
 async function runQueriesExamples() {
     try {
         // create a new Document
-        const newUser = await User.create({
-            name:'Mohan Kumhar',
-            email:'mohan@gmail.com',
-            age:'24',
-            isActive:true,
-            tags:['Developer','designer'],
-        })
-        console.log('Created new user', newUser);
+        // const newUser = await User.create({
+        //     name:'Nittish Kumhar',
+        //     email:'nittish@gmail.com',
+        //     age:'24',
+        //     isActive:false,
+        //     tags:['Developer','designer'],
+        // })
+
+        // const newUser = new User({
+        //     name:'Raj Kumhar',
+        //     email:'Raj@gmail.com',
+        //     age:'24',
+        //     isActive:true,
+        //     tags:['Developer','designer'],
+        // })
+
+        // await newUser.save()
+
+        // console.log('Created new user', newUser);
+
+        // const allUser = await User.find({})
+        // console.log(allUser)
+
+        const getUserActiveFalse = await User.find({isActive:true});
+        console.log(getUserActiveFalse);
+
     } catch (error) {
         console.log("error -> ",error)
     }finally{
