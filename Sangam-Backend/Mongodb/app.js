@@ -20,13 +20,13 @@ const User = mongoose.model('User',UserSchema);
 async function runQueriesExamples() {
     try {
         // create a new Document
-        const newUser = await User.create({
-            name:'jon Doe',
-            email:'jonDoe@gmail.com',
-            age:'35',
-            isActive:true,
-            tags:['Developer','designer'],
-        })
+        // const newUser = await User.create({
+        //     name:'jon Doe',
+        //     email:'jonDoe@gmail.com',
+        //     age:'35',
+        //     isActive:true,
+        //     tags:['Developer','designer'],
+        // })
 
         // const newUser = new User({
         //     name:'Raj Kumhar',
@@ -49,8 +49,11 @@ async function runQueriesExamples() {
         // const getNittishUser = await User.findOne({name:'Nittish Kumhar'})
         // console.log(getNittishUser);
 
-        const getLastCreatedUser = await User.findById(newUser._id)
-        console.log(getLastCreatedUser,"getLastCreatedUser")
+        // const getLastCreatedUser = await User.findById(newUser._id)
+        // console.log(getLastCreatedUser,"getLastCreatedUser")
+
+        const selectFields = await User.find().select('name email -_id');
+        console.log(selectFields);
 
     } catch (error) {
         console.log("error -> ",error)
