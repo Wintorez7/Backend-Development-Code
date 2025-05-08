@@ -67,8 +67,11 @@ async function runQueriesExamples() {
         // const deletedUser = await User.findByIdAndDelete(newUser._id)
         // console.log("deleted user ->",deletedUser)
 
+        const updateUser = await User.findByIdAndUpdate(newUser._id,{
+            $set:{age:55},$push:{tags:'updated'}
+        },{new:true})
+        console.log("updated user ->",updateUser)
         
-
     } catch (error) {
         console.log("error -> ",error)
     }finally{
