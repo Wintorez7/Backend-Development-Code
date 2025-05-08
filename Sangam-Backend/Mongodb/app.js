@@ -52,8 +52,14 @@ async function runQueriesExamples() {
         // const getLastCreatedUser = await User.findById(newUser._id)
         // console.log(getLastCreatedUser,"getLastCreatedUser")
 
-        const selectFields = await User.find().select('name email -_id');
-        console.log(selectFields);
+        // const selectFields = await User.find().select('name email -_id');
+        // console.log(selectFields);
+
+        // const limitedUser = await User.find().limit(3).skip(1);
+        // console.log(limitedUser)
+
+        // const sortedUsers = await User.find().sort({age: 1});
+        // console.log(sortedUsers)
 
     } catch (error) {
         console.log("error -> ",error)
