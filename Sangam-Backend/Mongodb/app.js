@@ -20,13 +20,13 @@ const User = mongoose.model('User',UserSchema);
 async function runQueriesExamples() {
     try {
         // create a new Document
-        // const newUser = await User.create({
-        //     name:'jon Doe',
-        //     email:'jonDoe@gmail.com',
-        //     age:'35',
-        //     isActive:true,
-        //     tags:['Developer','designer'],
-        // })
+        const newUser = await User.create({
+            name:'Updated user',
+            email:'updatedUser@gmail.com',
+            age:'35',
+            isActive:true,
+            tags:['Developer'],
+        })
 
         // const newUser = new User({
         //     name:'Raj Kumhar',
@@ -60,6 +60,14 @@ async function runQueriesExamples() {
 
         // const sortedUsers = await User.find().sort({age: 1});
         // console.log(sortedUsers)
+
+        // const countDocument = await User.countDocuments({isActive:true})
+        // console.log(countDocument);
+
+        // const deletedUser = await User.findByIdAndDelete(newUser._id)
+        // console.log("deleted user ->",deletedUser)
+
+        
 
     } catch (error) {
         console.log("error -> ",error)
