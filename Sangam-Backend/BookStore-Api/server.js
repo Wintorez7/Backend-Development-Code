@@ -1,6 +1,6 @@
 require('dotenv').config()
-const exppress = require('express')
-const app = exppress()
+const express = require('express')
+const app = express()
 const PORT = process.env.PORT || 3000;
 const connectToDb = require('./database/db.js')
 const bookRoutes = require('./routes/book-route.js')
@@ -9,10 +9,10 @@ const bookRoutes = require('./routes/book-route.js')
 connectToDb();
 
 // middleware
-app.use(exppress.json())
+app.use(express.json())
 
 // routes here
-
+app.use('/api/books',bookRoutes)
 
 app.listen(PORT,() => {
     console.log(`server running on port ${PORT}`);
