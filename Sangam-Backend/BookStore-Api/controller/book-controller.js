@@ -73,7 +73,7 @@ const addNewBook = async (req, res) => {
 };
 
 const updateSingleBook = async (req, res) => {
-
+    
 };
 
 const deleteBook = async (req, res) => {
