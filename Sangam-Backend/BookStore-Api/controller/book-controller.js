@@ -1,11 +1,53 @@
 const Book = require('../models/book.js')
 
 const getAllBooks = async (req, res) => {
-
+    try {
+        const allBooks = await Book.find({});
+        if(allBooks?.length > 0){
+            res.status(200).json({
+                success:true,
+                message:'List of Books fetched Succesfully',
+                data:allBooks
+            })
+        }else{
+            res.status(404).json({
+                success:false,
+                message:'Books Not Found'
+            })
+        }
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            success:false,
+            message:"Something went wrong! Please try again",
+        })
+    }
 };
 
 const getSingleBookById = async (req, res) => {
+    try {
+        const getCurrentBookId = req.params.id;
+        const bookDetailsbyId = await Book.findById(getCurrentBookId);
+        
+        if(!bookDetailsbyId){
+            return res.status(404).json({
+                success:false,
+                message:"Book with current id not found! please try agin with different ID"
+            })
+        }
+        res.status(200).json({
+            success:true,
+            data:bookDetailsbyId
+        })
 
+
+    } catch (error) {
+        console.log(error)
+         res.status(500).json({
+            success:false,
+            message:"Something went wrong! Please try again",
+        })
+    }
 };
 
 const addNewBook = async (req, res) => {
@@ -23,6 +65,10 @@ const addNewBook = async (req, res) => {
 
     } catch (error) {
         console.log(error)
+         res.status(500).json({
+            success:false,
+            message:"Something went wrong! Please try again",
+        })
     }
 };
 
