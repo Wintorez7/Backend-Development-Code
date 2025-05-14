@@ -88,7 +88,8 @@ const updateSingleBook = async (req, res) => {
         }else{
             res.status(200).json({
                 success:true,
-                message:"Book Updated Succesfully"
+                message:"Book Updated Succesfully",
+                data:updatedBook
             })
         }
     } catch (error) {
