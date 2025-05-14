@@ -73,7 +73,31 @@ const addNewBook = async (req, res) => {
 };
 
 const updateSingleBook = async (req, res) => {
-    
+    try {
+        const updatedBookFromData = req.body;
+        const getCurretnBookId = req.params.id;
+        const updatedBook = await Book.findByIdAndUpdate(getCurretnBookId,updatedBookFromData,{
+            new:true,
+
+        })
+        if(!updatedBook){
+            res.status(404).json({
+                success:false,
+                message:"Book Id not found"
+            })
+        }else{
+            res.status(200).json({
+                success:true,
+                message:"Book Updated Succesfully"
+            })
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            success:false,
+            message:"Something went wrong! Please try again",
+        })
+    }
 };
 
 const deleteBook = async (req, res) => {
@@ -88,6 +112,7 @@ const deleteBook = async (req, res) => {
         }else{
             res.status(200).json({
                 success:true,
+                data:bookDetailsbyId,
                 message:"Book Deleted Successfully" 
             })
         }
