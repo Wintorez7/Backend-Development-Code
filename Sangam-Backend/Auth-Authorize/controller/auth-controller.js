@@ -1,4 +1,5 @@
 const User = require('../models/index.js')
+const bcrypt = require('bcryptjs')
 
 // register controller
 const registerUser = async(req,res) => {
@@ -9,10 +10,33 @@ const registerUser = async(req,res) => {
         if(checkExistingUser){
             return res.status(404).json({
                 success:false,
-                message:'User Already Register either with same username or email'
+                message:'User Already Register either with same username or email! Please try with different username or email'
             })
         }
-        
+    //hash user password
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password,salt);
+
+    // create a new user
+    const newelyCreatedUser = new User({
+        username,
+        email,
+        password:hashedPassword,
+        role: role || 'user'
+    })
+    await newelyCreatedUser.save()
+    if(newelyCreatedUser){
+        res.status(201).json({
+            success:true,
+            message:"User Register successfully"
+        })
+    }else{
+        res.status(404).json({
+            success:false,
+            message:"Unable to register User"
+        })
+    }
+
     } catch (error) {
         console.log(error);
         res.status(500).json({
