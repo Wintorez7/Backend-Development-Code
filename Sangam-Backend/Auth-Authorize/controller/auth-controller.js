@@ -1,5 +1,6 @@
 const User = require('../models/index.js')
 const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
 
 // register controller
 const registerUser = async(req,res) => {
@@ -59,15 +60,23 @@ const loginUser = async(req,res) => {
                 message:"Invaild username or password"
             })
         }
+
+        
         // if the passoword is correct or not 
         const ispasswordMatch = await bcrypt.compare(password,user.password)
         if(!ispasswordMatch){
              return res.status(404).json({
                 success:false,
-                message:"Invaild username or password"
+                message:"Invaild credential"
             })
         }
-        
+       
+        //create a user token
+        const accessToken = jwt.sign({
+            userId : user._id,
+            username : user.username,
+            role : user.role
+        })
 
     } catch (error) {
         console.log(error);
