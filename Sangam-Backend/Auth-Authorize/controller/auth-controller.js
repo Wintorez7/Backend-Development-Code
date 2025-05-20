@@ -33,7 +33,7 @@ const registerUser = async(req,res) => {
     }else{
         res.status(404).json({
             success:false,
-            message:"Unable to register User"
+            message:"Unable to register User! please Try again"
         })
     }
 
