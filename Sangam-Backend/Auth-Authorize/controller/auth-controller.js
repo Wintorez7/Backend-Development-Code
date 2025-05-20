@@ -49,7 +49,26 @@ const registerUser = async(req,res) => {
 // login controller
 const loginUser = async(req,res) => {
     try {
+        const {username,password} = req.body;
+
+        //find if the current user is exist in databse or not
+        const user = await User.findOne({username});
+        if(!user){
+            return res.status(404).json({
+                success:false,
+                message:"Invaild username or password"
+            })
+        }
+        // if the passoword is correct or not 
+        const ispasswordMatch = await bcrypt.compare(password,user.password)
+        if(!ispasswordMatch){
+             return res.status(404).json({
+                success:false,
+                message:"Invaild username or password"
+            })
+        }
         
+
     } catch (error) {
         console.log(error);
         res.status(500).json({
