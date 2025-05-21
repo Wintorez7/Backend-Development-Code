@@ -76,7 +76,15 @@ const loginUser = async(req,res) => {
             userId : user._id,
             username : user.username,
             role : user.role
-        },process.env.JWT_SECRET_KEY)
+        },process.env.JWT_SECRET_KEY,{
+            expiresIn:'2m'
+        })
+
+        res.status(200).json({
+            success:true,
+            message:"Logged in Successful",
+            accessToken
+        })
 
     } catch (error) {
         console.log(error);
