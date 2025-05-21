@@ -76,7 +76,7 @@ const loginUser = async(req,res) => {
             userId : user._id,
             username : user.username,
             role : user.role
-        })
+        },process.env.JWT_SECRET_KEY)
 
     } catch (error) {
         console.log(error);
