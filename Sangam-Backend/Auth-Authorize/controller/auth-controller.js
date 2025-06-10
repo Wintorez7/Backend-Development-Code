@@ -14,29 +14,29 @@ const registerUser = async(req,res) => {
                 message:'User Already Register either with same username or email! Please try with different username or email'
             })
         }
-    //hash user password
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password,salt);
+        //hash user password
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password,salt);
 
-    // create a new user
-    const newelyCreatedUser = new User({
-        username,
-        email,
-        password:hashedPassword,
-        role: role || 'user'
-    })
-    await newelyCreatedUser.save()
-    if(newelyCreatedUser){
-        res.status(201).json({
-            success:true,
-            message:"User Register successfully"
+        // create a new user
+        const newelyCreatedUser = new User({
+            username,
+            email,
+            password:hashedPassword,
+            role: role || 'user'
         })
-    }else{
-        res.status(404).json({
-            success:false,
-            message:"Unable to register User! please Try again"
-        })
-    }
+        await newelyCreatedUser.save()
+        if(newelyCreatedUser){
+            res.status(201).json({
+                success:true,
+                message:"User Register successfully"
+            })
+        }else{
+            res.status(404).json({
+                success:false,
+                message:"Unable to register User! please Try again"
+            })
+        }
 
     } catch (error) {
         console.log(error);
@@ -46,6 +46,7 @@ const registerUser = async(req,res) => {
         })
     }
 }
+
 
 // login controller
 const loginUser = async(req,res) => {
