@@ -25,7 +25,10 @@ const registerUser = async(req,res) => {
             password:hashedPassword,
             role: role || 'user'
         })
-        await newelyCreatedUser.save()
+
+        // save User Data
+        await newelyCreatedUser.save();
+
         if(newelyCreatedUser){
             res.status(201).json({
                 success:true,
@@ -62,7 +65,6 @@ const loginUser = async(req,res) => {
             })
         }
 
-        
         // if the passoword is correct or not 
         const ispasswordMatch = await bcrypt.compare(password,user.password)
         if(!ispasswordMatch){
