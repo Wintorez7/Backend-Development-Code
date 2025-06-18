@@ -12,6 +12,9 @@ const ImageSchema = new mongoose.Schema({
     },
     uploadedBy: {
         type:mongoose.Schema.Types.ObjectId,
-        ref:'User'
+        ref:'User',
+        required:true
     }
-})
+},{timestamp:true});
+
+module.exports = mongoose.model('Image',ImageSchema); 
